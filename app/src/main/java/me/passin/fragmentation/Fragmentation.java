@@ -205,7 +205,7 @@ public class Fragmentation {
     }
 
     /**
-     * add 和 replace 可能会覆盖，以最终调用的方法为准
+     * add 和 replace 可能会覆盖，以最后调用的方法为准
      */
     public Fragmentation addToBackStack(@Nullable String name) {
         mFragmentTransaction.addToBackStack(name);
@@ -238,11 +238,27 @@ public class Fragmentation {
     }
 
     public void commit() {
-        mFragmentTransaction.commitAllowingStateLoss();
+        commit(true);
+    }
+
+    public void commit(boolean isAllowingStateLoss) {
+        if (isAllowingStateLoss) {
+            mFragmentTransaction.commitAllowingStateLoss();
+        } else {
+            mFragmentTransaction.commit();
+        }
     }
 
     public void commitNow() {
-        mFragmentTransaction.commitNowAllowingStateLoss();
+        commitNow(true);
+    }
+
+    public void commitNow(boolean isAllowingStateLoss) {
+        if (isAllowingStateLoss) {
+            mFragmentTransaction.commitNowAllowingStateLoss();
+        } else {
+            mFragmentTransaction.commitNow();
+        }
     }
 
     @NonNull
