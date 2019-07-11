@@ -336,6 +336,17 @@ public class Fragmentation {
     }
 
     @Nullable
+    public static Fragment findFragment(FragmentActivity activity,
+            @NonNull Class<? extends Fragment> fragmentClass) {
+        return findFragment(activity.getSupportFragmentManager(), fragmentClass.getName());
+    }
+
+    @Nullable
+    public static Fragment findFragment(FragmentActivity activity, @NonNull String tag) {
+        return findFragment(activity.getSupportFragmentManager(), tag);
+    }
+
+    @Nullable
     public static Fragment findFragment(FragmentManager fragmentManager,
             @NonNull Class<? extends Fragment> fragmentClass) {
         return findFragment(fragmentManager, fragmentClass.getName());
